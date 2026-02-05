@@ -9,137 +9,127 @@
   <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
 
   <style>
-    :root {
-      --bg-dark: #0f0f14;
-      --pink: #ff4d8d;
-      --orange: #ff7a5a;
-      --accent: linear-gradient(135deg, var(--orange), var(--pink));
-    }
+	:root {
+	  --bg-dark: #0f0f14;
+	  --pink: #ff4d8d;
+	  --orange: #ff7a5a;
+	  --accent: linear-gradient(135deg, var(--orange), var(--pink));
+	}
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Inter, system-ui, sans-serif;
-    }
+	* {
+	  margin: 0;
+	  padding: 0;
+	  box-sizing: border-box;
+	  font-family: Inter, system-ui, sans-serif;
+	}
 
-    body {
-      background: var(--bg-dark);
-      color: #f9fafb;
-      overflow-x: hidden;
-    }
+	body {
+	  background: var(--bg-dark);
+	  color: #f9fafb;
+	  overflow-x: hidden;
+	  padding-top: 72px;
+	}
 
-    section {
-      min-height: 100vh;
-      padding: 8rem 10vw;
-      display: flex;
-      align-items: center;
-    }
+	section {
+	  min-height: 100vh;
+	  padding: 8rem 10vw;
+	  display: flex;
+	  align-items: center;
+	}
 
-    h1, h2 {
-      font-weight: 700;
-    }
+	h1, h2 {
+	  font-weight: 700;
+	}
 
-    p {
-      color: #cbd5e1;
-      line-height: 1.6;
-    }
+	p {
+	  color: #cbd5e1;
+	  line-height: 1.6;
+	}
 
-    .hero {
-      justify-content: center;
-      text-align: center;
-      position: relative;
-    }
+	.hero {
+	  justify-content: center;
+	  text-align: center;
+	  position: relative;
+	}
 
-    .hero h1 {
-      font-size: clamp(4rem, 10vw, 7rem);
-      background: var(--accent);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
+	.hero h1 {
+	  font-size: clamp(4rem, 10vw, 7rem);
+	  background: var(--accent);
+	  -webkit-background-clip: text;
+	  color: transparent;
+	}
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 30% 30%, #ff7a5a33, transparent 60%),
-                  radial-gradient(circle at 70% 70%, #ff4d8d22, transparent 60%);
-      filter: blur(120px);
-      z-index: -1;
-    }
+	.hero::before {
+	  content: "";
+	  position: absolute;
+	  inset: 0;
+	  background:
+		radial-gradient(circle at 30% 30%, #ff7a5a33, transparent 60%),
+		radial-gradient(circle at 70% 70%, #ff4d8d22, transparent 60%);
+	  filter: blur(120px);
+	  z-index: -1;
+	}
 
-    .panel {
-      gap: 6rem;
-    }
+	.panel {
+	  gap: 6rem;
+	}
 
-    .panel:nth-child(even) {
-      background: #12121a;
-    }
+	.panel:nth-child(even) {
+	  background: #12121a;
+	}
 
-    .text {
-      max-width: 480px;
-    }
+	.text {
+	  max-width: 480px;
+	}
 
-    .mockup {
-      width: 420px;
-      height: 520px;
-      border-radius: 24px;
-      background: var(--accent);
-      padding: 2px;
-    }
+	.mockup {
+	  width: 420px;
+	  height: 520px;
+	  border-radius: 24px;
+	  background: var(--accent);
+	  padding: 2px;
+	}
 
-    .mockup-inner {
-      background: #0f0f14;
-      height: 100%;
-      border-radius: 22px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #6b7280;
-    }
+	.mockup-inner {
+	  background: #0f0f14;
+	  height: 100%;
+	  border-radius: 22px;
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  color: #6b7280;
+	}
 
-    .tag {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.4rem 0.8rem;
-      font-size: 0.7rem;
-      border-radius: 999px;
-      background: var(--accent);
-      color: black;
-      font-weight: 600;
-    }
+	.tag {
+	  display: inline-block;
+	  margin-top: 1rem;
+	  padding: 0.4rem 0.8rem;
+	  font-size: 0.7rem;
+	  border-radius: 999px;
+	  background: var(--accent);
+	  color: black;
+	  font-weight: 600;
+	}
 
-    .cta {
-      justify-content: center;
-      text-align: center;
-      background: var(--accent);
-      color: black;
-    }
+	.cta {
+	  justify-content: center;
+	  text-align: center;
+	  background: var(--accent);
+	  color: black;
+	}
 
-    .cta button {
-      margin-top: 2rem;
-      padding: 1rem 2.5rem;
-      border-radius: 999px;
-      border: none;
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      background: black;
-      color: white;
-    }
+	.cta button {
+	  margin-top: 2rem;
+	  padding: 1rem 2.5rem;
+	  border-radius: 999px;
+	  border: none;
+	  font-size: 1.1rem;
+	  font-weight: 600;
+	  cursor: pointer;
+	  background: black;
+	  color: white;
+	}
 
-    @media (max-width: 900px) {
-      section {
-        flex-direction: column;
-        padding: 6rem 2rem;
-      }
-
-      .mockup {
-        width: 100%;
-        height: 420px;
-      }
-    }
-	
 	.navbar {
 	  position: fixed;
 	  top: 0;
@@ -158,15 +148,22 @@
 	  display: flex;
 	  align-items: center;
 	  gap: 0.6rem;
-	  font-weight: 700;
-	  font-size: 1.2rem;
 	}
 
 	.logo-mark {
 	  width: 28px;
 	  height: 28px;
 	  border-radius: 8px;
-	  background: linear-gradient(135deg, #ff7a5a, #ff4d8d);
+	  background: var(--accent);
+	  display: block;
+	}
+
+	.logo-text {
+	  font-weight: 700;
+	  font-size: 1.2rem;
+	  line-height: 28px;
+	  display: block;
+	  letter-spacing: 0.02em;
 	}
 
 	.nav-right {
@@ -200,7 +197,6 @@
 	  border-radius: 12px;
 	  padding: 0.6rem;
 	  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-
 	  opacity: 0;
 	  visibility: hidden;
 	  transform: translateY(10px);
@@ -228,7 +224,7 @@
 	  visibility: visible;
 	  transform: translateY(0);
 	}
-	
+
 	.nav-dropdown::after {
 	  content: "";
 	  position: absolute;
@@ -241,7 +237,7 @@
 	.nav-button {
 	  padding: 0.6rem 1.4rem;
 	  border-radius: 999px;
-	  background: linear-gradient(135deg, #ff7a5a, #ff4d8d);
+	  background: var(--accent);
 	  color: black;
 	  font-weight: 600;
 	  text-decoration: none;
@@ -251,7 +247,7 @@
 	.nav-button:hover {
 	  opacity: 0.9;
 	}
-	
+
 	.menu-toggle {
 	  display: none;
 	  background: none;
@@ -300,25 +296,7 @@
 	  color: black;
 	  font-weight: 600;
 	}
-	
-	@media (max-width: 900px) {
-	  .nav-right {
-		display: none;
-	  }
 
-	  .menu-toggle {
-		display: block;
-	  }
-
-	  .logo-text {
-		display: none;
-	  }
-	}
-
-	body {
-	  padding-top: 72px;
-	}
-	
 	.footer {
 	  background: #0b0b10;
 	  padding: 4rem 6vw;
@@ -366,7 +344,31 @@
 	.footer-links a:hover {
 	  color: #ff4d8d;
 	}
-	
+
+	@media (max-width: 900px) {
+	  section {
+		flex-direction: column;
+		padding: 6rem 2rem;
+	  }
+
+	  .mockup {
+		width: 100%;
+		height: 420px;
+	  }
+
+	  .nav-right {
+		display: none;
+	  }
+
+	  .menu-toggle {
+		display: block;
+	  }
+
+	  .logo-text {
+		display: none;
+	  }
+	}
+
 	@media (max-width: 600px) {
 	  .footer-inner {
 		flex-direction: column;
@@ -380,16 +382,34 @@
 		justify-content: flex-start;
 	  }
 	}
+	
+	.logo {
+	  display: flex !important;
+	  flex-direction: row !important;
+	  align-items: center !important;
+	  gap: 0.6rem;
+	  white-space: nowrap;
+	}
+
+	.logo img,
+	.logo .logo-mark {
+	  flex-shrink: 0;
+	}
+
+	.logo-text {
+	  display: inline-block;
+	  line-height: 28px;
+	}
 
   </style>
+
 </head>
 
 <body>
     <nav class="navbar">
-	  <div class="nav-left">
-    	  <img src="/img/logo.svg" width="48px">
-		  <span class="logo-text">TouchLNE</span>
-	    </div>
+	   <div class="logo">
+		<img src="image-test.svg" alt="TouchLNE logo" class="logo-mark">
+		<a href="https://touchlne.com/" class="logo-text" style="color: white; text-decoration: none;">TouchLNE</a>
 
 	    <button class="menu-toggle" aria-label="Open menu">
 		  ☰
@@ -397,10 +417,9 @@
 	  </div>
 
 	  <div class="nav-right">
-		<a href="https://touchlne.com" class="nav-link">Home</a>
 
 		<div class="nav-dropdown">
-		  <span class="nav-link">About</span>
+		  <a href="https://touchlne.com/about" class="nav-link">About</a>
 		  <div class="dropdown">
 			<a href="https://touchlne.com/about">What is TouchLNE?</a>
 			<a href="https://touchlne.com/team">Our Team</a>
@@ -409,7 +428,7 @@
 		</div>
 
 		<div class="nav-dropdown">
-		  <span class="nav-link">Pricing</span>
+		  <a href="https://touchlne.com/pricing" class="nav-link">Pricing</a>
 		  <div class="dropdown">
 			<a href="https://touchlne.com/pricing">TouchLNE Pricing</a>
 			<a href="https://touchlne.com/pricing/clubs">Clubs</a>
@@ -419,7 +438,7 @@
 		</div>
 
 		<div class="nav-dropdown">
-		  <span class="nav-link">Support</span>
+		  <a href="https://support.touchlne.com" class="nav-link">Support</a>
 		  <div class="dropdown">
 			<a href="https://support.touchlne.com">Help Centre</a>
 			<a href="https://docs.touchlne.com">Admin Documentation</a>
@@ -550,8 +569,8 @@
 		  <div class="footer-inner">
 
 			<div class="footer-brand">
-			  <img src="/img/logo.svg" width="48px">
-			  <span>TouchLNE</span>
+			  <img src="image-test.svg" width="48px" class="logo-mark">
+			  <a href="https://touchlne.com/" style="color: white; text-decoration: none;">TouchLNE</a>
 			</div>
 
 			<div class="footer-meta">
