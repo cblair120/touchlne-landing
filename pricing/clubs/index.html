@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TouchLNE — Plans & Pricing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root {
+      --bg-dark: #0f0f14;
+      --pink: #ff4d8d;
+      --orange: #ff7a5a;
+      --accent: linear-gradient(135deg, var(--orange), var(--pink));
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Inter, system-ui, sans-serif;
+    }
+
+    body {
+      background: var(--bg-dark);
+      color: #f9fafb;
+      overflow-x: hidden;
+      padding-top: 72px; /* for fixed navbar */
+    }
+
+    h1, h2 {
+      font-weight: 700;
+    }
+
+    p {
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+
+	.navbar {
+	  position: fixed;
+	  top: 0;
+	  width: 100%;
+	  height: 72px;
+	  padding: 0 6vw;
+	  display: flex;
+	  align-items: center;
+	  justify-content: space-between;
+	  background: rgba(15, 15, 20, 0.75);
+	  backdrop-filter: blur(12px);
+	  z-index: 1000;
+	}
+
+	.nav-left .logo {
+	  display: flex;
+	  align-items: center;
+	  gap: 0.6rem;
+	  font-weight: 700;
+	  font-size: 1.2rem;
+	}
+
+	.logo-mark {
+	  width: 28px;
+	  height: 28px;
+	  border-radius: 8px;
+	  background: linear-gradient(135deg, #ff7a5a, #ff4d8d);
+	}
+
+	.nav-right {
+	  display: flex;
+	  align-items: center;
+	  gap: 2rem;
+	}
+
+	.nav-link {
+	  color: #f9fafb;
+	  text-decoration: none;
+	  font-size: 0.95rem;
+	  cursor: pointer;
+	  position: relative;
+	}
+
+	.nav-link:hover {
+	  color: #ff7a5a;
+	}
+
+	.nav-dropdown {
+	  position: relative;
+	}
+
+	.dropdown {
+	  position: absolute;
+	  top: 140%;
+	  left: 0;
+	  min-width: 200px;
+	  background: #12121a;
+	  border-radius: 12px;
+	  padding: 0.6rem;
+	  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+
+	  opacity: 0;
+	  visibility: hidden;
+	  transform: translateY(10px);
+	  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+	  z-index: 1000;
+	}
+
+	.dropdown a {
+	  display: block;
+	  padding: 0.6rem 0.8rem;
+	  font-size: 0.9rem;
+	  text-decoration: none;
+	  color: #cbd5e1;
+	  border-radius: 8px;
+	}
+
+	.dropdown a:hover {
+	  background: #1a1a22;
+	  color: white;
+	}
+
+	.nav-dropdown:hover .dropdown,
+	.nav-dropdown:focus-within .dropdown {
+	  opacity: 1;
+	  visibility: visible;
+	  transform: translateY(0);
+	}
+	
+	.nav-dropdown::after {
+	  content: "";
+	  position: absolute;
+	  left: 0;
+	  top: 100%;
+	  width: 100%;
+	  height: 12px;
+	}
+
+	.nav-button {
+	  padding: 0.6rem 1.4rem;
+	  border-radius: 999px;
+	  background: linear-gradient(135deg, #ff7a5a, #ff4d8d);
+	  color: black;
+	  font-weight: 600;
+	  text-decoration: none;
+	  font-size: 0.9rem;
+	}
+
+	.nav-button:hover {
+	  opacity: 0.9;
+	}
+	
+	.menu-toggle {
+	  display: none;
+	  background: none;
+	  border: none;
+	  font-size: 1.6rem;
+	  color: white;
+	  cursor: pointer;
+	}
+
+	.mobile-menu {
+	  position: fixed;
+	  top: 0;
+	  right: 0;
+	  width: 280px;
+	  height: 100vh;
+	  background: #0f0f14;
+	  padding: 6rem 2rem 2rem;
+	  display: flex;
+	  flex-direction: column;
+	  gap: 1rem;
+	  transform: translateX(100%);
+	  transition: transform 0.3s ease;
+	  z-index: 999;
+	}
+
+	.mobile-menu a,
+	.mobile-menu summary {
+	  color: white;
+	  text-decoration: none;
+	  font-size: 1rem;
+	  cursor: pointer;
+	}
+
+	.mobile-menu details a {
+	  padding-left: 1rem;
+	  font-size: 0.9rem;
+	  color: #cbd5e1;
+	}
+
+	.mobile-menu .mobile-cta {
+	  margin-top: auto;
+	  padding: 0.8rem;
+	  text-align: center;
+	  border-radius: 999px;
+	  background: var(--accent);
+	  color: black;
+	  font-weight: 600;
+	}
+	
+	@media (max-width: 900px) {
+	  .nav-right {
+		display: none;
+	  }
+
+	  .menu-toggle {
+		display: block;
+	  }
+
+	  .logo-text {
+		display: none;
+	  }
+	}
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 6rem 2rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 5rem);
+      background: var(--accent);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      margin-top: 1.5rem;
+      font-size: 1.2rem;
+    }
+
+    /* Plans Section */
+    .plans {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .plan-card {
+      background: #12121a;
+      border-radius: 24px;
+      flex: 1 1 280px;
+      max-width: 320px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      transition: transform 0.2s;
+    }
+
+    .plan-card:hover {
+      transform: translateY(-8px);
+    }
+	
+	.plan-card.best {
+	  position: relative;
+	  background:
+		linear-gradient(#12121a, #12121a) padding-box,
+		linear-gradient(135deg, #ff7a5a, #ff4d8d) border-box;
+	  border: 2px solid transparent;
+	  box-shadow:
+		0 0 0 1px rgba(255, 122, 90, 0.35),
+		0 0 0 2px rgba(255, 77, 141, 0.25),
+		0 16px 40px rgba(255, 122, 90, 0.15),
+		0 24px 60px rgba(255, 77, 141, 0.12);
+	}
+
+	.plan-card.best:hover {
+	  transform: translateY(-10px) scale(1.02);
+	}
+
+	.plan-card.best::before {
+	  content: "Best Value";
+	  position: absolute;
+	  top: -14px;
+	  left: 50%;
+	  transform: translateX(-50%);
+	  padding: 0.35rem 0.9rem;
+	  font-size: 0.7rem;
+	  font-weight: 700;
+	  letter-spacing: 0.04em;
+	  text-transform: uppercase;
+	  border-radius: 999px;
+	  background: linear-gradient(135deg, #ff7a5a, #ff4d8d);
+	  color: black;
+	  box-shadow: 0 6px 20px rgba(255, 122, 90, 0.4);
+	}
+
+    .plan-card h2 {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .plan-price {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      background: var(--accent);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .plan-features {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+
+    .plan-features li {
+      margin-bottom: 0.75rem;
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .plan-features li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--pink);
+    }
+
+    .plan-button {
+      padding: 0.75rem 2rem;
+      border-radius: 999px;
+      border: none;
+      background: var(--accent);
+      color: black;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .plan-button:hover {
+      opacity: 0.85;
+    }
+
+    @media (max-width: 900px) {
+      .plans { flex-direction: column; align-items: center; }
+    }
+	
+	.billing-toggle {
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  gap: 1rem;
+	  margin: 2rem auto 4rem;
+	}
+
+	.billing-label {
+	  font-size: 0.9rem;
+	  color: #9ca3af;
+	  cursor: pointer;
+	  transition: color 0.2s;
+	}
+
+	.billing-label.active {
+	  color: #f9fafb;
+	  font-weight: 600;
+	}
+
+	.billing-label small {
+	  color: #ff7a5a;
+	}
+
+	.toggle-switch {
+	  width: 48px;
+	  height: 26px;
+	  background: #1a1a22;
+	  border-radius: 999px;
+	  position: relative;
+	  cursor: pointer;
+	}
+
+	.toggle-knob {
+	  position: absolute;
+	  top: 3px;
+	  left: 3px;
+	  width: 20px;
+	  height: 20px;
+	  background: linear-gradient(135deg, #ff7a5a, #ff4d8d);
+	  border-radius: 50%;
+	  transition: transform 0.25s ease;
+	}
+
+	.toggle-switch.yearly .toggle-knob {
+	  transform: translateX(22px);
+	}
+
+    .footer {
+      background: #0b0b10;
+      padding: 4rem 6vw;
+      border-top: 1px solid #1a1a22;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 700;
+    }
+
+    .footer-meta {
+      text-align: right;
+    }
+
+    .footer-meta p {
+      font-size: 0.85rem;
+      color: #6b7280;
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      font-size: 0.85rem;
+      color: #9ca3af;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover { color: #ff4d8d; }
+
+    @media (max-width: 600px) {
+      .footer-inner { flex-direction: column; }
+      .footer-meta { text-align: left; }
+      .footer-links { justify-content: flex-start; }
+    }
+
+  </style>
+</head>
+
+<body>
+    <nav class="navbar">
+	  <div class="nav-left">
+		<div class="logo">
+		  <img src="/img/logo.svg" alt="TouchLNE logo" class="logo-mark">
+		  <a href="https://touchlne.com/" class="logo-text" style="color: white; text-decoration: none;">TouchLNE</a>
+		</div>
+	  </div>
+
+	  <button class="menu-toggle" aria-label="Open menu">☰</button>
+
+	  <div class="nav-right">
+
+		<div class="nav-dropdown">
+		  <a href="https://touchlne.com/about" class="nav-link">About</a>
+		  <div class="dropdown">
+			<a href="https://touchlne.com/about">What is TouchLNE?</a>
+			<a href="https://touchlne.com/team">Our Team</a>
+			<a href="https://touchlne.com/vision">Vision</a>
+		  </div>
+		</div>
+
+		<div class="nav-dropdown">
+		  <a href="https://touchlne.com/pricing" class="nav-link">Pricing</a>
+		  <div class="dropdown">
+			<a href="https://touchlne.com/pricing/clubs">Clubs</a>
+			<a href="https://touchlne.com/pricing/organisations">Organisations</a>
+		  </div>
+		</div>
+
+		<div class="nav-dropdown">
+		  <a href="https://support.touchlne.com" class="nav-link">Support</a>
+		  <div class="dropdown">
+			<a href="https://support.touchlne.com">Help Centre</a>
+			<a href="https://docs.touchlne.com">Admin Documentation</a>
+			<a href="https://support.touchlne.com/contact">Contact Us</a>
+		  </div>
+		</div>
+
+		<a href="https://app.touchlne.com" class="nav-button">Open TouchLNE</a>
+	  </div>
+	</nav>
+
+	<div class="mobile-menu" id="mobileMenu">
+	  <a href="https://touchlne.com/">Home</a>
+
+	  <details>
+		<summary>About</summary>
+		<a href="https://touchlne.com/about">What is TouchLNE?</a><br>
+		<a href="https://touchlne.com/team">Our Team</a><br>
+		<a href="https://touchlne.com/vision">Vision</a>
+	  </details>
+
+	  <details>
+		<summary>Pricing</summary>
+		<a href="https://touchlne.com/pricing">Overview</a><br>
+		<a href="https://touchlne.com/pricing/clubs">Clubs</a><br>
+		<a href="https://touchlne.com/pricing/organisations">Organisations</a>
+	  </details>
+
+	  <details>
+		<summary>Support</summary>
+		<a href="https://support.touchlne.com">Help Centre</a><br>
+		<a href="https://docs.touchlne.com">Admin Documentation</a><br>
+		<a href="https://support.touchlne.com/contact">Contact Us</a>
+	  </details>
+
+	  <a href="https://app.touchlne.com" class="mobile-cta">Open TouchLNE</a>
+	</div>
+
+  <section class="hero">
+    <h1>Club Plans & Pricing</h1>
+    <p>Value soloutions for all clubs.</p>
+  </section>
+  
+  <div class="billing-toggle">
+  <span class="billing-label active" data-plan="monthly">Monthly</span>
+	  <div class="toggle-switch">
+		<div class="toggle-knob"></div>
+	  </div>
+	  <span class="billing-label" data-plan="yearly">Yearly <small>(save 15%)</small></span>
+	</div>
+	
+  <section class="plans">
+
+    <div class="plan-card">
+      <h2>Basic</h2>
+      <div class="plan-price" data-monthly="$3/mo" data-yearly="$30/yr">$3/mo</div>
+      <ul class="plan-features">
+		<li>Training Rosters</li>
+        <li>Team List Management</li>
+		<li>Up to 10 Individual Teams</li>
+        <li>Schedule up to 50 Practice Games</li>
+        <li>Post Club News</li>
+		<li>Up to 250 Users</li>
+		<li>Up to 256MB Storage</li>
+		<li>Support Tickets</li>
+      </ul>
+      <button class="plan-button">Get Started</button>
+    </div>
+
+    <div class="plan-card">
+      <h2>Pro</h2>
+      <div class="plan-price" data-monthly="$12/mo" data-yearly="$122/yr">$12/mo</div>
+      <ul class="plan-features">
+        <li>Everything in Basic</li>
+		<li>Host up to 25 Club Events<li>
+		<li>Three Customisable Membership Teirs</li>
+		<li>Up to 50 Individual Teams</li>
+		<li>Schedule up to 250 Practice Games</li>
+		<li>Team Communications Channels</li>
+		<li>Up to 1500 Users</li>
+		<li>Fully Customisable User Permissions</li>
+        <li>Full Analytics</li>
+		<li>Match-Day Mangement</li>
+		<li>Up to 32GB Storage<li>
+        <li>Priority support</li>
+      </ul>
+      <button class="plan-button">Get Started</button>
+    </div>
+
+    <div class="plan-card best">
+      <h2>Pro+</h2>
+      <div class="plan-price" data-monthly="$20/mo" data-yearly="$200/yr">$20/mo</div>
+      <ul class="plan-features">
+        <li>Everything in Pro</li>
+        <li>Host up to 100 Club Events</li>
+        <li>Five Customisable Membership Teirs</li>
+		<li>Up to 100 Teams</li>
+		<li>Schedule  up to 500 Practice Games</li>
+		<li>Up to 5000 Users</li>
+		<li>Up to 128GB Storage</li>
+		<li>Priority Support</li>
+      </ul>
+      <button class="plan-button">Get Started</button>
+    </div>
+
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="/img/logo.svg" width="48px">
+        <a href="https://touchlne.com/" style="color: white; text-decoration: none;">TouchLNE</a>
+      </div>
+      <div class="footer-meta">
+        <p>© 2026 TouchLNE. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="https://touchlne.com/terms">Terms of Service</a>
+          <a href="https://touchlne.com/privacy">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+<script>
+  const billingToggle = document.querySelector(".toggle-switch");
+  const labels = document.querySelectorAll(".billing-label");
+  const prices = document.querySelectorAll(".plan-price");
+
+  let mode = "monthly";
+
+  function updatePrices() {
+    prices.forEach(price => {
+      price.textContent = price.dataset[mode];
+    });
+
+    labels.forEach(label => {
+      label.classList.toggle("active", label.dataset.plan === mode);
+    });
+
+    billingToggle.classList.toggle("yearly", mode === "yearly");
+  }
+
+  billingToggle.addEventListener("click", () => {
+    mode = mode === "monthly" ? "yearly" : "monthly";
+    updatePrices();
+  });
+
+  labels.forEach(label => {
+    label.addEventListener("click", () => {
+      mode = label.dataset.plan;
+      updatePrices();
+    });
+  });
+
+  const menuToggle = document.querySelector(".menu-toggle");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  menuToggle.addEventListener("click", () => {
+    mobileMenu.style.transform =
+      mobileMenu.style.transform === "translateX(0%)"
+        ? "translateX(100%)"
+        : "translateX(0%)";
+  });
+</script>
+</html>
